@@ -2,13 +2,25 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/docker-existing-dockerfile
 {
 	"name": "Existing Dockerfile",
-	"runArgs": ["--init", "--gpus=all"],
+	"runArgs": [
+		"--init", 
+		"--gpus=all",
+		"--net=host",
+		"-e", "DISPLAY=${env:DISPLAY}",
+		"--device=/dev/input"
+	],
+	"mounts": [
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+	],
 
-	// Sets the run context to one level up instead of the .devcontainer folder.
-	"context": "..",
-
-	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-	"dockerFile": "../puffertank.dockerfile",
+	// Build configuration using host network to resolve connection reset issues
+	"build": {
+		"dockerfile": "../puffertank.dockerfile",
+		"context": "..",
+		"options": [
+			"--network=host"
+		]
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
@@ -16,8 +28,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-        "ms-python.vscode-pylance"
-	],
+		"ms-python.vscode-pylance"
+	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
