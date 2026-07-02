@@ -1,0 +1,1 @@
+add sourcing of env to entrypoint or w/e
