@@ -47,7 +47,7 @@ test() {
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v /mnt/wslg:/mnt/wslg \
-            -v "$(pwd):/puffertank/docker" \
+            -v "$(pwd):/workspaces/puffertank" \
             -e DISPLAY=$DISPLAY \
             -e XAUTHORITY=/root/.Xauthority \
             -v $HOME/.Xauthority:/root/.Xauthority \
